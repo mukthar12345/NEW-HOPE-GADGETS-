@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell/Swap - New Hope Gadgets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary: #3a86ff;
+            --secondary: #ff006e;
+            --accent: #8338ec;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #38b000;
+            --warning: #ffbe0b;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .section-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .sell-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Process Section */
+        .process {
+            background-color: var(--light-gray);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .process-steps:before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient);
+            z-index: 1;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+            padding: 0 1rem;
+        }
+
+        /* Form Section */
+        .sell-form {
+            background-color: white;
+        }
+
+        .form-container {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .image-upload {
+            border: 2px dashed var(--light-gray);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .image-upload:hover {
+            border-color: var(--primary);
+        }
+
+        .upload-icon {
+            font-size: 2.5rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .image-preview {
+            display: none;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .preview-image {
+            max-width: 200px;
+            max-height: 200px;
+            margin-bottom: 1rem;
+        }
+
+        /* Pricing Guide */
+        .pricing-guide {
+            background-color: var(--light-gray);
+        }
+
+        .guide-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .device-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        .device-table th, .device-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .device-table th {
+            background-color: var(--light-gray);
+            font-weight: 600;
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Why Sell With Us */
+        .benefits {
+            background-color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 80%;
+                height: 100vh;
+                padding: 2rem;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: 0.4s;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .process-steps:before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-laptop-code"></i>
+                    New Hope Gadgets
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="index" class="nav-link">Home</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="sell-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Sell or Swap Your Device</h1>
+                <p class="hero-subtitle">Get the best value for your used gadgets or trade them for an upgrade. We offer fair prices and a hassle-free process.</p>
+                <a href="#form" class="btn btn-primary">Get Started Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section process">
+        <div class="container">
+            <h2 class="section-title">How It <span>Works</span></h2>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Submit Details</h3>
+                    <p class="step-description">Fill out the form with your device information and upload photos.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Get a Quote</h3>
+                    <p class="step-description">We'll evaluate your device and provide a fair price quote.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Confirm & Meet</h3>
+                    <p class="step-description">Agree on the price and schedule a meeting at our store.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Get Paid</h3>
+                    <p class="step-description">Complete the transaction and receive instant payment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="section sell-form" id="form">
+        <div class="container">
+            <h2 class="section-title">Device <span>Information</span></h2>
+            
+            <div class="form-container">
+                <h3 class="form-title">Tell Us About Your Device</h3>
+                
+                <form id="deviceForm">
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="customerName" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="customerPhone" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Device Type</label>
+                        <select class="form-control" id="deviceType" required>
+                            <option value="">Select device type</option>
+                            <option value="smartphone">Smartphone</option>
+                            <option value="tablet">Tablet</option>
+                            <option value="laptop">Laptop</option>
+                            <option value="console">Gaming Console</option>
+                            <option value="accessory">Accessory</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Brand</label>
+                        <input type="text" class="form-control" id="deviceBrand" placeholder="E.g. Apple, Samsung, etc." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Model</label>
+                        <input type="text" class="form-control" id="deviceModel" placeholder="E.g. iPhone 12, Galaxy S21, etc." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Condition</label>
+                        <select class="form-control" id="deviceCondition" required>
+                            <option value="">Select condition</option>
+                            <option value="new">New (Sealed)</option>
+                            <option value="excellent">Excellent (Like new)</option>
+                            <option value="good">Good (Minor wear)</option>
+                            <option value="fair">Fair (Visible wear)</option>
+                            <option value="broken">Broken/Not working</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Storage Capacity</label>
+                        <input type="text" class="form-control" id="deviceStorage" placeholder="E.g. 128GB, 256GB, etc.">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Color</label>
+                        <input type="text" class="form-control" id="deviceColor" placeholder="Device color">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Additional Details</label>
+                        <textarea class="form-control" id="deviceDetails" placeholder="Any accessories included, issues, etc."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Device Images</label>
+                        <div class="image-upload" id="imageUpload">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <p>Click to upload images or drag and drop</p>
+                            <p class="small">Maximum 4 images (PNG, JPG)</p>
+                            <input type="file" id="fileInput" accept="image/*" multiple style="display: none;">
+                        </div>
+                        <div class="image-preview" id="imagePreview">
+                            <p>Selected images:</p>
+                            <div id="previewContainer"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Preferred Contact Method</label>
+                        <select class="form-control" id="contactMethod">
+                            <option value="whatsapp">WhatsApp</option>
+                            <option value="call">Phone Call</option>
+                            <option value="sms">SMS</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-whatsapp" style="width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Guide -->
+    <section class="section pricing-guide">
+        <div class="container">
+            <h2 class="section-title">Estimated <span>Pricing</span></h2>
+            
+            <div class="guide-container">
+                <p>Below are estimated prices for common devices in good condition. Actual prices may vary based on your device's specific condition, market demand, and included accessories.</p>
+                
+                <table class="device-table">
+                    <thead>
+                        <tr>
+                            <th>Device</th>
+                            <th>Condition</th>
+                            <th>Estimated Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>iPhone 12</td>
+                            <td>Good</td>
+                            <td class="price">₦180,000 - ₦220,000</td>
+                        </tr>
+                        <tr>
+                            <td>Samsung Galaxy S21</td>
+                            <td>Good</td>
+                            <td class="price">₦150,000 - ₦190,000</td>
+                        </tr>
+                        <tr>
+                            <td>iPad Air 4</td>
+                            <td>Excellent</td>
+                            <td class="price">₦170,000 - ₦210,000</td>
+                        </tr>
+                        <tr>
+                            <td>MacBook Air M1</td>
+                            <td>Good</td>
+                            <td class="price">₦320,000 - ₦370,000</td>
+                        </tr>
+                        <tr>
+                            <td>PlayStation 5</td>
+                            <td>Like New</td>
+                            <td class="price">₦380,000 - ₦420,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p style="margin-top: 1.5rem; font-style: italic;">Note: These are estimates only. We need to physically inspect your device to provide an exact quote.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Sell With Us -->
+    <section class="section benefits">
+        <div class="container">
+            <h2 class="section-title">Why Sell With <span>New Hope Gadgets</span></h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3 class="benefit-title">Best Prices</h3>
+                    <p>We offer competitive market rates for your devices.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="benefit-title">Instant Payment</h3>
+                    <p>Get paid immediately once we agree on a price.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="benefit-title">Secure Transaction</h3>
+                    <p>Safe and secure process with no hidden fees.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="benefit-title">Swap Options</h3>
+                    <p>Trade your device for an upgrade with minimal cash difference.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to Sell or Swap?</h2>
+            <p>Submit your device details now and get a quote within hours</p>
+            <a href="#form" class="btn btn-outline" style="background: white; color: var(--primary); margin-top: 2rem;">Submit Your Device</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-heading">New Hope Gadgets</h3>
+                    <p>Making tech ownership simpler, smarter, and more sustainable for everyone.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="product.html">Products</a></li>
+                        <li><a href="service.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Computer Village, Lagos</li>
+                        <li><i class="fas fa-phone"></i> +234 903 866 0849</li>
+                        <li><i class="fas fa-envelope"></i> info@newhopegadgets.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9AM-6PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 New Hope Gadgets. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile navigation when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Image Upload Functionality
+        const imageUpload = document.getElementById('imageUpload');
+        const fileInput = document.getElementById('fileInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewContainer = document.getElementById('previewContainer');
+        
+        imageUpload.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        fileInput.addEventListener('change', function() {
+            previewContainer.innerHTML = '';
+            
+            if (this.files && this.files.length > 0) {
+                imagePreview.style.display = 'block';
+                
+                for (let i = 0; i < this.files.length; i++) {
+                    if (i >= 4) break; // Limit to 4 images
+                    
+                    const reader = new FileReader();
+                    const file = this.files[i];
+                    
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'preview-image';
+                        previewContainer.appendChild(img);
+                    }
+                    
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        // Form Submission to WhatsApp
+        const deviceForm = document.getElementById('deviceForm');
+        
+        deviceForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const deviceType = document.getElementById('deviceType').value;
+            const brand = document.getElementById('deviceBrand').value;
+            const model = document.getElementById('deviceModel').value;
+            const condition = document.getElementById('deviceCondition').value;
+            const storage = document.getElementById('deviceStorage').value;
+            const color = document.getElementById('deviceColor').value;
+            const details = document.getElementById('deviceDetails').value;
+            
+            // Create WhatsApp message
+            const message = `Hello! I'm interested in selling/ swapping my device.%0A%0A` +
+                           `*Name:* ${name}%0A` +
+                           `*Phone:* ${phone}%0A` +
+                           `*Device Type:* ${deviceType}%0A` +
+                           `*Brand:* ${brand}%0A` +
+                           `*Model:* ${model}%0A` +
+                           `*Condition:* ${condition}%0A` +
+                           `*Storage:* ${storage}%0A` +
+                           `*Color:* ${color}%0A` +
+                           `*Additional Details:* ${details}%0A%0A` +
+                           `I'd like to get a quote for this device.`;
+            
+            // Open WhatsApp with pre-filled message
+            window.open(`https://wa.me/+234 903 866 0849?text=${message}`, '_blank');
+            
+            // Reset form
+            deviceForm.reset();
+            imagePreview.style.display = 'none';
+            previewContainer.innerHTML = '';
+            
+            // Show confirmation message
+            alert('Thank you! Your device information has been prepared. You will now be redirected to WhatsApp to send us these details.');
+        });
+    </script>
+</body>
+</html>
