@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - New Hope Gadgets</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary: #3a86ff;
+            --secondary: #ff006e;
+            --accent: #8338ec;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #38b000;
+            --warning: #ffbe0b;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .section-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Service Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-header {
+            padding: 2rem;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .service-features {
+            margin-bottom: 2rem;
+        }
+
+        .feature-list {
+            margin-left: 1.5rem;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        .pricing-table th, .pricing-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .pricing-table th {
+            background-color: var(--light-gray);
+            font-weight: 600;
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .service-cta {
+            text-align: center;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        /* Process Section */
+        .process {
+            background-color: var(--light-gray);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .process-steps:before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient);
+            z-index: 1;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+            padding: 0 1rem;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose {
+            background-color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 80%;
+                height: 100vh;
+                padding: 2rem;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: 0.4s;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .process-steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .process-steps:before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-laptop-code"></i>
+                    New Hope Gadgets
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link">Home</a></li>
+                    <li><a href="#" class="nav-link">Products</a></li>
+                    <li><a href="#" class="nav-link active">Services</a></li>
+                    <li><a href="#" class="nav-link">About Us</a></li>
+                    <li><a href="#" class="nav-link">Contact</a></li>
+                    <li><a href="#" class="nav-link">Sell/Swap</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our <span>Services</span></h2>
+            
+            <div class="services-grid">
+                <!-- Buying Service -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3 class="service-title">Buying</h3>
+                    </div>
+                    
+                    <div class="service-content">
+                        <p class="service-description">
+                            Discover a curated selection of new and pre-owned gadgets that have been thoroughly tested and verified for quality. We offer competitive prices and a warranty on all purchases.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>What We Offer:</h4>
+                            <ul class="feature-list">
+                                <li>New and pre-owned smartphones, laptops, and tablets</li>
+                                <li>Gaming consoles and accessories</li>
+                                <li>30-day warranty on all devices</li>
+                                <li>Free setup and data transfer</li>
+                                <li>Flexible payment plans available</li>
+                            </ul>
+                        </div>
+                        
+                        <h4>Featured Products:</h4>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Condition</th>
+                                    <th>Price Range</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>iPhone 13 Pro</td>
+                                    <td>New</td>
+                                    <td class="price">₦380,000 - ₦420,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Samsung Galaxy S21</td>
+                                    <td>Used</td>
+                                    <td class="price">₦220,000 - ₦260,000</td>
+                                </tr>
+                                <tr>
+                                    <td>MacBook Air M1</td>
+                                    <td>Refurbished</td>
+                                    <td class="price">₦400,000 - ₦450,000</td>
+                                </tr>
+                                <tr>
+                                    <td>PlayStation 5</td>
+                                    <td>New</td>
+                                    <td class="price">₦430,000 - ₦470,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <a href="#" class="btn btn-primary">Browse Products</a>
+                    </div>
+                </div>
+                
+                <!-- Selling/Swapping Service -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3 class="service-title">Selling & Swapping</h3>
+                    </div>
+                    
+                    <div class="service-content">
+                        <p class="service-description">
+                            Get the best value for your used gadgets or trade them for an upgrade. We offer fair market prices and transparent evaluation processes.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>Our Process:</h4>
+                            <ul class="feature-list">
+                                <li>Free device evaluation and price quote</li>
+                                <li>Instant payment or trade-in options</li>
+                                <li>We accept devices in any condition</li>
+                                <li>Data wiping service included</li>
+                                <li>No hidden fees or charges</li>
+                            </ul>
+                        </div>
+                        
+                        <h4>Estimated Values:</h4>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Device</th>
+                                    <th>Condition</th>
+                                    <th>Estimated Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>iPhone 12</td>
+                                    <td>Good</td>
+                                    <td class="price">₦180,000 - ₦220,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Samsung S20</td>
+                                    <td>Fair</td>
+                                    <td class="price">₦120,000 - ₦150,000</td>
+                                </tr>
+                                <tr>
+                                    <td>MacBook Pro 2019</td>
+                                    <td>Excellent</td>
+                                    <td class="price">₦280,000 - ₦320,000</td>
+                                </tr>
+                                <tr>
+                                    <td>iPad Air 4</td>
+                                    <td>Good</td>
+                                    <td class="price">₦140,000 - ₦170,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <a href="#" class="btn btn-primary">Sell Your Device</a>
+                    </div>
+                </div>
+                
+                <!-- Repairs Service -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="service-title">Repairs</h3>
+                    </div>
+                    
+                    <div class="service-content">
+                        <p class="service-description">
+                            Our expert technicians provide fast and reliable repair services for all types of gadgets. We use quality parts and offer warranties on all repairs.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>Repair Services:</h4>
+                            <ul class="feature-list">
+                                <li>Screen replacement</li>
+                                <li>Battery replacement</li>
+                                <li>Water damage repair</li>
+                                <li>Software issues</li>
+                                <li>Hardware repairs</li>
+                                <li>Data recovery</li>
+                            </ul>
+                        </div>
+                        
+                        <h4>Repair Pricing:</h4>
+                        <table class="pricing-table">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Device Type</th>
+                                    <th>Price Range</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Screen Replacement</td>
+                                    <td>Smartphones</td>
+                                    <td class="price">₦25,000 - ₦60,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Battery Replacement</td>
+                                    <td>Smartphones</td>
+                                    <td class="price">₦15,000 - ₦35,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Water Damage Repair</td>
+                                    <td>Smartphones</td>
+                                    <td class="price">₦20,000 - ₦50,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Software Issues</td>
+                                    <td>All Devices</td>
+                                    <td class="price">₦5,000 - ₦15,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Laptop Repair</td>
+                                    <td>Laptops</td>
+                                    <td class="price">₦15,000 - ₦45,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <a href="#" class="btn btn-primary">Schedule Repair</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section process">
+        <div class="container">
+            <h2 class="section-title">How It <span>Works</span></h2>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Consultation</h3>
+                    <p class="step-description">Tell us what you need - whether you're buying, selling, or repairing a device.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Evaluation</h3>
+                    <p class="step-description">We assess your needs or evaluate your device for accurate pricing.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Solution</h3>
+                    <p class="step-description">We provide the best solution tailored to your specific requirements.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Completion</h3>
+                    <p class="step-description">Transaction completed with satisfaction guaranteed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section why-choose">
+        <div class="container">
+            <h2 class="section-title">Why Choose <span>New Hope Gadgets</span></h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="benefit-title">Quality Guaranteed</h3>
+                    <p>All devices are thoroughly tested and come with a warranty.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3 class="benefit-title">Fair Prices</h3>
+                    <p>We offer competitive prices for both buying and selling.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="benefit-title">Quick Service</h3>
+                    <p>Most repairs are completed within 24-48 hours.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="benefit-title">Expert Technicians</h3>
+                    <p>Our team has years of experience with all device types.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to Get Started?</h2>
+            <p>Visit us today at Computer Village, Lagos or contact us for more information</p>
+            <a href="#" class="btn btn-outline" style="background: white; color: var(--primary); margin-top: 2rem;">Contact Us Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-heading">New Hope Gadgets</h3>
+                    <p>Making tech ownership simpler, smarter, and more sustainable for everyone.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Products</a>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Computer Village, Lagos</li>
+                        <li><i class="fas fa-phone"></i> +234 801 234 5678</li>
+                        <li><i class="fas fa-envelope"></i> info@newhopegadgets.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9AM-6PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 New Hope Gadgets. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile navigation when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

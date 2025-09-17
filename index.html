@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Hope Gadgets - Quality Tech for Everyone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary: #3a86ff;
+            --secondary: #ff006e;
+            --accent: #8338ec;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #38b000;
+            --warning: #ffbe0b;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .section-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Intro Section */
+        .intro {
+            background-color: white;
+        }
+
+        .intro-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--light-gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Product Showcase */
+        .product-showcase {
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .product-slide {
+            min-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .product-image {
+            height: 300px;
+            width: auto;
+            margin-bottom: 2rem;
+            object-fit: contain;
+        }
+
+        .product-name {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .product-description {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 0.5rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Featured Products */
+        .featured-products {
+            background-color: var(--light-gray);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        /* Call to Action */
+        .cta {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 80%;
+                height: 100vh;
+                padding: 2rem;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: 0.4s;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-laptop-code"></i>
+                    New Hope Gadgets
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="discription page.html" class="nav-link">Home</a></li>
+                    <li><a href="product.html*" class="nav-link">Products</a></li>
+                    <li><a href="service.html" class="nav-link">Services</a></li>
+                    <li><a href="about.html" class="nav-link">About Us</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="all.html" class="nav-link">Sell/Swap</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Tech Ownership Made Simpler & Smarter</h1>
+                <p class="hero-subtitle">At New Hope Gadgets, we provide reliable and affordable technology with quality, transparency, and customer satisfaction at our core.</p>
+                <div class="hero-buttons">
+                    <a href="product.html" class="btn btn-primary">Explore Products</a>
+                    <a href="all.html" class="btn btn-outline">Sell Your Device</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="section intro">
+        <div class="container">
+            <div class="intro-content">
+                <h2 class="section-title">Welcome to <span>New Hope Gadgets</span></h2>
+                <p class="intro-text">
+                    At New Hope Gadgets, we believe everyone deserves access to reliable and affordable technology. Located in the heart of Computer Village, Lagos, we specialize in buying, selling, and swapping new and pre-owned gadgets — from smartphones and laptops to gaming consoles. Our expert repair services ensure your devices stay in top condition, saving you time and money. With a commitment to quality, transparency, and customer satisfaction, we're here to make tech ownership simpler, smarter, and more sustainable for everyone.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services">
+        <div class="container">
+            <h2 class="section-title">Our <span>Services</span></h2>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Buy</h3>
+                    <p>Find quality new and pre-owned gadgets at competitive prices.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Sell</h3>
+                    <p>Get the best value for your used devices with our fair pricing.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Swap</h3>
+                    <p>Trade in your current device for an upgrade with minimal cash difference.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Repair</h3>
+                    <p>Expert repair services to keep your devices in top condition.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section class="section product-showcase">
+        <div class="container">
+            <h2 class="section-title">Featured <span>Gadgets</span></h2>
+            
+            <div class="product-slider">
+                <div class="product-slide">
+                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="iPhone" class="product-image">
+                    <h3 class="product-name">Latest iPhones</h3>
+                    <p class="product-description">Discover the latest iPhone models with cutting-edge technology and premium features.</p>
+                </div>
+                
+                <div class="product-slide">
+                    <img src="https://images.unsplash.com/photo-1468436139062-f60a71c5c892?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Samsung" class="product-image">
+                    <h3 class="product-name">Samsung Galaxy</h3>
+                    <p class="product-description">Powerful Android smartphones with stunning displays and exceptional cameras.</p>
+                </div>
+                
+                <div class="product-slide">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Laptops" class="product-image">
+                    <h3 class="product-name">Laptops & Tablets</h3>
+                    <p class="product-description">High-performance laptops and tablets for work, study, and entertainment.</p>
+                </div>
+                
+                <div class="product-slide">
+                    <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Gaming Consoles" class="product-image">
+                    <h3 class="product-name">Gaming Consoles</h3>
+                    <p class="product-description">Next-generation gaming consoles for the ultimate gaming experience.</p>
+                </div>
+            </div>
+            
+            <div class="slider-controls">
+                <div class="slider-dot active"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section featured-products">
+        <div class="container">
+            <h2 class="section-title">Popular <span>Products</span></h2>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Smartphone" class="product-img">
+                    <div class="product-content">
+                        <h3 class="product-title">Premium Smartphones</h3>
+                        <p class="product-price">From ₦85,000</p>
+                        <a href="#" class="btn btn-primary">View Options</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Laptop" class="product-img">
+                    <div class="product-content">
+                        <h3 class="product-title">Laptops & Tablets</h3>
+                        <p class="product-price">From ₦120,000</p>
+                        <a href="#" class="btn btn-primary">View Options</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Gaming Console" class="product-img">
+                    <div class="product-content">
+                        <h3 class="product-title">Gaming Consoles</h3>
+                        <p class="product-price">From ₦150,000</p>
+                        <a href="#" class="btn btn-primary">View Options</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">Customer <span>Testimonials</span></h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"New Hope Gadgets gave me a great price for my old phone and helped me find the perfect replacement. Their service was exceptional!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer" class="author-img">
+                        <div>
+                            <h4>Adeolu Johnson</h4>
+                            <p>Lagos</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"I had my laptop repaired here and it works like new now. The technicians are skilled and the prices are reasonable."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer" class="author-img">
+                        <div>
+                            <h4>Chiamaka Okoro</h4>
+                            <p>Ikeja</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The team at New Hope Gadgets helped me swap my old gaming console for a newer model. The process was smooth and hassle-free."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Customer" class="author-img">
+                        <div>
+                            <h4>Emmanuel Bello</h4>
+                            <p>Victoria Island</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to Find Your Perfect Gadget?</h2>
+            <p>Visit us today at Computer Village, Lagos or get in touch for quotes and inquiries.</p>
+            <a href="#" class="btn btn-outline" style="background: white; color: var(--primary); margin-top: 2rem;">Contact Us Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-heading">New Hope Gadgets</h3>
+                    <p>Making tech ownership simpler, smarter, and more sustainable for everyone.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Computer Village, Lagos</li>
+                        <li><i class="fas fa-phone"></i> +234 801 234 5678</li>
+                        <li><i class="fas fa-envelope"></i> info@newhopegadgets.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9AM-6PM</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 New Hope Gadgets. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile navigation when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Product Slider Functionality
+        const slider = document.querySelector('.product-slider');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+        const slideCount = document.querySelectorAll('.product-slide').length;
+        
+        // Function to update slider position
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update active dot
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        // Set up automatic slide change every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        }, 5000);
+        
+        // Add click events to dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+    </script>
+</body>
+</html>
